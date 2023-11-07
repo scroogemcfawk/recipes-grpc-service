@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+//package mypackagepath;
+
+option java_multiple_files = true;
+//option java_generic_services = true;
+
+message Recipe {
+  string name = 1;
+  repeated Ingredient ingredients = 2;
+
+  message Ingredient {
+    string product = 1;
+    float weight = 2;
+  }
+}
+
+service RecipeServer {
+  rpc GetRecipes(ServerRequest) returns (ServerResponse) {}
+}
+
+message ServerRequest {
+  string query = 1;
+}
+
+message ServerResponse {
+  repeated Recipe result = 1;
+}
